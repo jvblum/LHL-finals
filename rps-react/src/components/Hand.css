@@ -1,0 +1,16 @@
+.Hand {
+  /* width: 50vw; */
+  /* width: 480px; */
+  margin: 0 30vw;
+  display: flex;
+  justify-content: space-around;
+  /* border: 2px red; */
+}
+
+.Card {
+  background: url('../logo.svg');
+  font-size: 98px;
+  color: yellow;
+  width: 3ch;
+  /* border: 2px red; */
+}
