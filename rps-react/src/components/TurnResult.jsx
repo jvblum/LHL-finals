@@ -1,6 +1,7 @@
-import { evaluate } from "../helpers/evaluate";
+import { evaluate, complexEval } from "../helpers/evaluate";
 
 export default function TurnResult(props) {
+  //ideally, this is a pop-up window that closes when clicked
   const reset = () => {
     props.reset.setPickA(null);
     props.reset.setPickB(null);
@@ -11,7 +12,7 @@ export default function TurnResult(props) {
     <div>
       <aside class="Pick">{pickA}</aside>
       <aside class="Pick">{pickB}</aside>
-      <div class="result">{evaluate(pickA, pickB)}</div>
+      <div class="result">{complexEval(pickA, pickB)}</div>
       <button onClick={reset}>Next Turn</button>
     </div>
   )

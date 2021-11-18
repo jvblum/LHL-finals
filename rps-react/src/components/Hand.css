@@ -12,5 +12,7 @@
   font-size: 98px;
   color: yellow;
   width: 3ch;
+  height: 3ch;
   /* border: 2px red; */
+  border-radius: 50%;
 }
