@@ -1,2 +1,21 @@
-// display deck top of card.
-// argument all cards are visible so no need to render the 'back' of the cards.
+export default function Card(props) {
+  const deck = props.yourDeck;
+  const top = deck[3];
+  // there is no hand state
+  // the first three card in the deck are hand cards
+  // the top of the deck is the fourth card
+
+  // onclick - view deck
+
+  return (
+    <button
+      className="Deck"
+      style={{
+        background: `url(${top ? top.img : null})`
+      }}
+      disabled
+    >
+      {top ? top.type + top.rating : "0"}
+    </button>
+  );
+}

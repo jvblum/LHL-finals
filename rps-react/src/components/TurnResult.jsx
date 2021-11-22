@@ -1,19 +1,21 @@
-import { evaluate, complexEval } from "../helpers/evaluate";
+import { evaluate } from "../helpers/evaluate"; // this import might not be necessary
 
+//ideally, this is a pop-up window that closes when clicked
 export default function TurnResult(props) {
-  //ideally, this is a pop-up window that closes when clicked
-  const reset = () => {
-    props.reset.setPickA(null);
-    props.reset.setPickB(null);
-  }
-  const pickA = props.hand[props.picks.pickA];
-  const pickB = props.hand[props.picks.pickB];
+  const { nextTurn, yourHand, theirHand } = props;
+
+  const yourPick = yourHand[props.yourPick];
+  const theirPick = theirHand[props.theirPick];
+  const message = evaluate(yourPick, theirPick);
+
   return (
     <div>
-      <aside class="Pick">{pickA}</aside>
-      <aside class="Pick">{pickB}</aside>
-      <div class="result">{complexEval(pickA, pickB)}</div>
-      <button onClick={reset}>Next Turn</button>
+      <button className="next" onClick={nextTurn}>
+        <p className="Pick">
+          <i>{yourPick.type}</i> - <b>{theirPick.type}</b>
+        </p>
+        <div className="result">{message}</div>
+      </button>
     </div>
-  )
+  );
 }

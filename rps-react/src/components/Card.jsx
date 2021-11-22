@@ -1,9 +1,30 @@
-export default function Card (props) {
-  // sample image for how custom cards can work
-  const img = "https://images.squarespace-cdn.com/content/v1/580bf0f32e69cff5c8089d38/1479095450463-R0098N3M7BQ337K75X43/liberty-strap-pink-dog-200px.png?format=750w"
-
+export default function Card(props) {
+  const { card, index, setPick, computerPick } = props;
   const onClick = () => {
-    props.onClick(prev => props.index);
-  }
-  return <button className="Card" style={{background: `url(${img})`}} onClick={onClick}>{props.card}</button>
-};
+    setPick(index);
+
+    // if computer player, updates with pickA change
+    computerPick();
+  };
+  return (
+    // <div className="Card" onClick={onClick}>
+    // </div>
+    <div className="Card">
+      <button
+        className="Card"
+        onClick={onClick}
+        disabled={props.theirHand}
+        style={{ background: `url(${card.img})` }}
+      >
+        <div title={card.type + card.rating}>
+          <img
+            alt={`${card.type}${card.rating}`}
+            className="card-image"
+            src={card.img}
+          />
+        </div>
+        {/* {`${card.type}${card.rating}`} */}
+      </button>
+    </div>
+  );
+}
