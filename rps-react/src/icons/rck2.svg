@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> <!-- Created with Vectornator for iOS (http://vectornator.io/) --><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg height="100%" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" xmlns:vectornator="http://vectornator.io" version="1.1" viewBox="0 0 512 512">
+<metadata>
+<vectornator:setting key="DimensionsVisible" value="1"/>
+<vectornator:setting key="PencilOnly" value="0"/>
+<vectornator:setting key="SnapToPoints" value="0"/>
+<vectornator:setting key="GuidesVisible" value="1"/>
+<vectornator:setting key="CMYKEnabledKey" value="0"/>
+<vectornator:setting key="OutlineMode" value="0"/>
+<vectornator:setting key="SnapToEdges" value="0"/>
+<vectornator:setting key="RulersVisible" value="1"/>
+<vectornator:setting key="DisplayWhiteBackground" value="0"/>
+<vectornator:setting key="doHistoryDisabled" value="0"/>
+<vectornator:setting key="TimeLapseWatermarkDisabled" value="0"/>
+<vectornator:setting key="SnapToGuides" value="1"/>
+<vectornator:setting key="DynamicGuides" value="0"/>
+<vectornator:setting key="SnapToGrid" value="0"/>
+<vectornator:setting key="Units" value="Pixels"/>
+<vectornator:setting key="IsolateActiveLayer" value="0"/>
+</metadata>
+<defs/>
+<g id="ROCK" vectornator:layerName="ROCK">
+<path stroke="#000000" stroke-width="0.1" d="M506.853+203.358C510.227+220.348+512+237.956+512+256L512+256C512+397.385+403.123+512+268.816+512L243.184+512C108.877+512+0+397.385+0+256L0+256C0+114.615+108.877+0+243.184+0L268.816+0C385.982+0+483.795+87.2266+506.853+203.358" fill="#ff8c8c" stroke-linecap="round" opacity="1" stroke-linejoin="round"/>
+<path stroke="#000000" stroke-width="0.1" d="M5.24219+206L506.758+206C509.653+206+512+228.386+512+256L512+256C512+283.614+509.653+306+506.758+306L5.24219+306C2.34701+306+0+283.614+0+256L0+256C0+228.386+2.34701+206+5.24219+206Z" fill="#8cff90" stroke-linecap="round" opacity="1" stroke-linejoin="round"/>
+<path stroke="#000000" stroke-width="0.1" d="M181.326+160.303L181.326+160.303C198.664+160.303+212.72+165.275+212.72+171.408L212.72+261.624C212.72+267.757+198.664+272.728+181.326+272.728L181.326+272.728C163.988+272.728+149.933+267.757+149.933+261.624L149.933+171.408C149.933+165.275+163.988+160.303+181.326+160.303Z" fill="#4f2828" stroke-linecap="round" opacity="1" stroke-linejoin="round"/>
+<path stroke="#000000" stroke-width="0.1" d="M331.228+160.698L331.228+160.698C348.566+160.698+362.621+165.623+362.621+171.699L362.621+261.074C362.621+267.15+348.566+272.075+331.228+272.075L331.228+272.075C313.89+272.075+299.835+267.15+299.835+261.074L299.835+171.699C299.835+165.623+313.89+160.698+331.228+160.698Z" fill="#4f2828" stroke-linecap="round" opacity="1" stroke-linejoin="round"/>
+<path stroke="#000000" stroke-width="0.1" d="M255.55+159.269L255.55+159.269C272.888+159.269+286.943+164.244+286.943+170.38L286.943+260.65C286.943+266.786+272.888+271.761+255.55+271.761L255.55+271.761C238.211+271.761+224.156+266.786+224.156+260.65L224.156+170.38C224.156+164.244+238.211+159.269+255.55+159.269Z" fill="#4f2828" stroke-linecap="round" opacity="1" stroke-linejoin="round"/>
+<path stroke="#000000" stroke-width="0.1" d="M359.159+324.664L359.159+324.664C359.159+346.393+353.296+364.009+346.065+364.009L239.689+364.009C232.457+364.009+226.595+346.394+226.595+324.664L226.595+324.664C226.595+302.934+232.457+285.319+239.689+285.319L346.065+285.319C353.296+285.319+359.159+302.934+359.159+324.664Z" fill="#4f2828" stroke-linecap="round" opacity="1" stroke-linejoin="round"/>
+<path stroke="#000000" stroke-width="0.1" d="M212.361+325.134L212.361+325.134C212.361+346.865+209.662+364.481+206.333+364.481L157.359+364.481C154.03+364.481+151.331+346.865+151.331+325.134L151.331+325.134C151.331+303.404+154.03+285.788+157.359+285.788L206.333+285.788C209.662+285.788+212.361+303.404+212.361+325.134Z" fill="#4f2828" stroke-linecap="round" opacity="1" stroke-linejoin="round"/>
+</g>
+</svg>

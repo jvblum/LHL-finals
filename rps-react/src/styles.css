@@ -1,0 +1,72 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+/*  */
+
+.Pick {
+  font-size: 98px;
+}
+
+.result {
+  font-weight: 900;
+}
+
+.Deck {
+  font-size: 64px;
+  width: 80px;
+  height: 120px;
+  color: yellow;
+
+  background-position: center;
+}
+
+.next {
+  width: 100vw;
+  height: 100vw;
+  /* opacity: 20%; */
+  position: absolute;
+
+  background-color: opacity 20%;
+  top: 0;
+  left: 0;
+}
+
+.card-image {
+  width: 99%;
+  height: 99%;
+  object-fit: fill;
+  border-radius: 50%;
+
+  /* display: flex; */
+  /* justify-self: center; */
+  /* background-position: center; */
+}
+
+/*  */
+
+.Hand {
+  /* width: 50vw; */
+  /* width: 480px; */
+  margin: 0 30vw;
+  display: flex;
+  justify-content: space-around;
+  /* border: 2px red; */
+}
+
+.Card {
+  font-size: 48px;
+  color: yellow;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+
+  box-shadow: black 1px;
+  /* background-color: black; */
+  /* padding: 1%; */
+  /* border: 2px black; */
+
+  /* background-size: contain; */
+  /* background-position: center; */
+}
