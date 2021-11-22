@@ -1,31 +1,79 @@
-import { useState, useEffect } from "react";
-import './App.css';
-import Hand from './components/Hand';
+import "./styles.css";
+
+import { useState } from "react";
+import useEvaluate from "./hooks/useEvaluate";
+import Hand from "./components/Hand";
+import Deck from "./components/Deck";
 import TurnResult from "./components/TurnResult";
 
-import { computerPlayer } from "./helpers/comPlayer";
-import { cardType } from "./helpers/cardType";
+import { setHand, shuffle, computerPlayer } from "./helpers/helpers";
+import { deck } from "./data/deck";
 
-function App() {
+export default function App() {
   const [pickA, setPickA] = useState(null); // pick index of hand
   const [pickB, setPickB] = useState(null);
+  const [deckA, setDeckA] = useState(shuffle(deck, 4));
+  const [deckB, setDeckB] = useState(shuffle(deck, 4));
+  const { yourScore, theirScore, complexEval, resetScore } = useEvaluate();
 
-  // const options = ['✄' ,'♦️' ,'⌧'];
-  const options = Object.keys(cardType).map(key => cardType[key]);
-  // console.log(options);
+  const handA = setHand(deckA);
+  const handB = setHand(deckB);
 
-  // for computer players, updates on pickA change
-  useEffect(() => {
-    setPickB(computerPlayer(options));
-  }, [pickA]);
+  const computerPick = () => {
+    setPickB(computerPlayer(handB));
+  };
+
+  const nextTurn = () => {
+    setDeckA((prev) => {
+      const newArr = [...prev];
+      newArr.splice(pickA, 1);
+      return newArr;
+    });
+    setDeckB((prev) => {
+      const newArr = [...prev];
+      newArr.splice(pickB, 1);
+      return newArr;
+    });
+    setPickA(null);
+    setPickB(null);
+    complexEval(handA[pickA], handB[pickB]);
+  };
+
+  const newGame = () => {
+    setPickA(null);
+    setPickB(null);
+    setDeckA(shuffle(deck, 4));
+    setDeckB(shuffle(deck, 4));
+    resetScore();
+  };
 
   return (
     <div className="App">
-      <Hand hand={options} onClick={setPickA}/>
-      {pickA !== null && <TurnResult reset={{setPickA, setPickB}} picks={{pickA, pickB}} hand={options}/>}
+      <Deck yourDeck={deckB} />
+      <Hand hand={handB} theirHand={true} />
+      <p>Their Side </p>
+      <hr />
+      <p>
+        Your Score: {yourScore} | Their Score: {theirScore}
+      </p>
+      <hr />
+      <p>Your Side</p>
+      <Hand hand={handA} setPick={setPickA} computerPick={computerPick} />
+      <Deck yourDeck={deckA} />
+      {pickA !== null && pickB !== null && (
+        <TurnResult
+          nextTurn={nextTurn}
+          yourPick={pickA}
+          theirPick={pickB}
+          yourHand={handA}
+          theirHand={handB}
+        />
+      )}
+      {!handA.length && !handB.length && (
+        <div>
+          <button onClick={newGame}>New Game</button>
+        </div>
+      )}
     </div>
   );
 }
-
-
-export default App;
