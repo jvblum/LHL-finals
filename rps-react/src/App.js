@@ -19,8 +19,6 @@ export default function App() {
   const handA = setHand(deckA);
   const handB = setHand(deckB);
 
-  console.log(deck);
-
   const computerPick = () => {
     setPickB(computerPlayer(handB));
   };
@@ -48,7 +46,7 @@ export default function App() {
     setDeckB(shuffle(deck, 4));
     resetScore();
   };
-console.log(deck.length);
+
   return (
     <div className="App">
       <Deck yourDeck={deckB} />
