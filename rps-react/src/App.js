@@ -1,6 +1,6 @@
 import "./styles.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useEvaluate from "./hooks/useEvaluate";
 import Hand from "./components/Hand";
 import Deck from "./components/Deck";
@@ -9,6 +9,9 @@ import TurnResult from "./components/TurnResult";
 import { setHand, shuffle, computerPlayer } from "./helpers/helpers";
 import { deck } from "./data/deck";
 
+import socketIOClient from "socket.io-client";
+const client = socketIOClient(process.env.REACT_APP_ENDPOINT);
+
 export default function App() {
   const [pickA, setPickA] = useState(null); // pick index of hand
   const [pickB, setPickB] = useState(null);
@@ -16,8 +19,23 @@ export default function App() {
   const [deckB, setDeckB] = useState(shuffle(deck, 4));
   const { yourScore, theirScore, complexEval, resetScore } = useEvaluate();
 
-  const handA = setHand(deckA);
-  const handB = setHand(deckB);
+  useEffect(() => {
+    // listeners
+    client.on("theirDeck", data => {
+      setDeckB(data);
+    });
+    client.on("theirPick", data => {
+      setPickB(data);
+    });
+  }, []);
+  useEffect(() => {
+    if (pickA !== null) {
+      client.emit("myPick", pickA);
+    }
+  }, [pickA]);
+  useEffect(() => {
+    client.emit("myDeck", deckA);
+  }, [deckA]);
 
   const computerPick = () => {
     setPickB(computerPlayer(handB));
@@ -47,28 +65,35 @@ export default function App() {
     resetScore();
   };
 
+  const handA = setHand(deckA);
+  const handB = setHand(deckB);
+
   return (
     <div className="App">
-      <Deck yourDeck={deckB} />
-      <Hand hand={handB} theirHand={true} />
-      <p>Their Side </p>
-      <hr />
+      <div className="Them">
+        <Deck yourDeck={deckB} />
+        <Hand hand={handB} theirHand={true} />
+        <p>Their Side </p>
+      </div>
+    <hr />
       <p>
         Your Score: {yourScore} | Their Score: {theirScore}
       </p>
       <hr />
-      <p>Your Side</p>
-      <Hand hand={handA} setPick={setPickA} computerPick={computerPick} />
-      <Deck yourDeck={deckA} />
+      <div className="You">
+        <p>Your Side</p>
+        <Hand hand={handA} setPick={setPickA} computerPick={computerPick} />
+        <Deck yourDeck={deckA} />
+      </div>
       {pickA !== null && pickB !== null && (
         <TurnResult
-          nextTurn={nextTurn}
-          yourPick={pickA}
-          theirPick={pickB}
-          yourHand={handA}
-          theirHand={handB}
+        nextTurn={nextTurn}
+        yourPick={pickA}
+        theirPick={pickB}
+        yourHand={handA}
+        theirHand={handB}
         />
-      )}
+        )}
       {!handA.length && !handB.length && (
         <div>
           <button onClick={newGame}>New Game</button>
