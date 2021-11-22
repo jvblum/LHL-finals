@@ -19,6 +19,8 @@ export default function App() {
   const handA = setHand(deckA);
   const handB = setHand(deckB);
 
+  console.log(deck);
+
   const computerPick = () => {
     setPickB(computerPlayer(handB));
   };

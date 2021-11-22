@@ -76,10 +76,11 @@ const deckTemplate = [
 const generateDeck = (template, reference) => {
   const deck = [];
   template.forEach((val) => {
-    for (i = 0; i < val; i++) {
+    for (let i = 0; i < val; i++) {
      deck.push(reference[val]);
     }
   })
+  return deck;
 }
 
 export const deck = generateDeck(deckTemplate, ref);

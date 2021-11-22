@@ -1,47 +1,29 @@
-import { cardType } from "./cardType";
+import { cardType } from "../data/cardType";
 
 export const evaluate = (pickA, pickB) => {
-  const rules = {
-    '✄': '⌧',
-    '♦️': '✄',
-    '⌧': '♦️'
-  } // what beats what
-
-  if (pickA === pickB) {
-    return "Tie Game!";
-  }
-  if (rules[pickA].includes(pickB)) {
-    return "Player A Wins!";
-  }
-  // if (rules[pickB] === pickA) {
-  //   return "Player B Wins!";
-  // } // this third check might not be necessary at the moment
-  return "Player B Wins!";
-}; // currently accepts pick-type string and returns with results
-
-export const complexEval = (pickA, pickB) => {
   const { rock, paper, scissors, defend, might } = cardType;
-
   const rules = {
     [rock]: scissors,
     [paper]: rock,
     [scissors]: paper,
     [defend]: might,
     [might]: [rock, paper, scissors]
-  } // what beats what
+  }; // what beats what
 
-  if (rules[pickA].includes(pickB)) {
-    return "Player A Wins!";
+  const point = pickA.rating * pickB.rating;
+  if (rules[pickA.type].includes(pickB.type)) {
+    return `Player A Wins! + ${point}`;
   }
 
-  if (pickA === pickB) {
+  if (rules[pickB.type].includes(pickA.type)) {
+    return `Player B Wins! + ${point}`;
+  } // specific to case where pickB === defend
+
+  if (pickA.type === pickB.type) {
     return "Tie Game!";
   }
 
-  if (pickA === defend || pickB === defend) {
+  if (pickA.type === defend || pickB.type === defend) {
     return "Tie Game!";
-  } // this comes last because "pass" beats "super" first before it forces a tie
-
-  return "Player B Wins!"
-
-}; // currently accepts pick-type string and returns with results; will incorporate multiplier
+  } // comes after so "defend beats "might" before it forces a tie
+}; // accepts pick objects and returns with results; will incorporate multiplier
