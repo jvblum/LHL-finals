@@ -16,13 +16,13 @@ export default function Card(props) {
         disabled={props.theirHand}
         style={{ background: `url(${card.img})` }}
       >
-        <div title={card.type + card.rating}>
+        {/* <div title={card.type + card.rating}>
           <img
             alt={`${card.type}${card.rating}`}
             className="card-image"
             src={card.img}
           />
-        </div>
+        </div> */}
         {/* {`${card.type}${card.rating}`} */}
       </button>
     </div>

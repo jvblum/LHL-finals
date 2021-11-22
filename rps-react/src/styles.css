@@ -62,8 +62,9 @@
   height: 96px;
   border-radius: 50%;
 
-  background-color: black;
-  padding: 1%;
+  box-shadow: black;
+  /* background-color: black; */
+  /* padding: 1%; */
   /* border: 2px black; */
 
   /* background-size: contain; */

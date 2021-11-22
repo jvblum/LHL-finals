@@ -48,7 +48,7 @@ export default function App() {
     setDeckB(shuffle(deck, 4));
     resetScore();
   };
-
+console.log(deck.length);
   return (
     <div className="App">
       <Deck yourDeck={deckB} />

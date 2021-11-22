@@ -64,20 +64,20 @@ const ref = [
 
 const deckTemplate = [
   4, // rock1
-  1, // rock2
-  4, // scissors1
-  1, // scissors2:
   4, // paper1
-  1, // paper2
+  4, // scissors1
+  1, // rock2
+  1, // paper2,
+  1, // scissors2:
   3, // defend
   2 // might:
 ]; // awkward implementation; consider restructuring ref
 
 const generateDeck = (template, reference) => {
   const deck = [];
-  template.forEach((val) => {
+  template.forEach((val, index) => {
     for (let i = 0; i < val; i++) {
-     deck.push(reference[val]);
+     deck.push(reference[index]);
     }
   })
   return deck;
