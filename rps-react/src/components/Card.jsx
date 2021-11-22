@@ -4,13 +4,14 @@ export default function Card(props) {
     setPick(index);
 
     // if computer player, updates with pickA change
-    computerPick();
+    // computerPick();
   };
   return (
     // <div className="Card" onClick={onClick}>
     // </div>
     <div className="Card">
       <button
+        index={index}
         className="Card"
         onClick={onClick}
         disabled={props.theirHand}

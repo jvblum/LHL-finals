@@ -19,17 +19,24 @@ const io = socketIo(server,{
 
 io.on("connection", (socket) => {
   console.log("New client connected");
+  socket.broadcast.emit("theyConnect", true);
+
+  socket.on("initDeck", data => {
+    console.log("initDeck");
+    socket.broadcast.emit("initDeck", data); // will change to room specific
+  });
 
   socket.on("myDeck", data => {
-    console.log("incoming deck:", "length:", data.length, "top:", data[0]);
+    // console.log("incoming deck:", "length:", data.length, "top:", data[0]);
     socket.broadcast.emit("theirDeck", data); // will change to room specific
   });
   socket.on("myPick", data => {
-    console.log("incoming pick", data);
+    // console.log("incoming pick", data);
     socket.broadcast.emit("theirPick", data); // will change to room specific
   });
 
   socket.on("disconnect", () => {
+    socket.broadcast.emit("theyConnect", false);
     console.log("Client disconnected");
   });
 });

@@ -21,21 +21,32 @@ export default function App() {
 
   useEffect(() => {
     // listeners
-    client.on("theirDeck", data => {
-      setDeckB(data);
+    client.on("initDeck", data => {
+      // init deck from set table config
+      console.log('data', data);
+      setDeckA(data.deckB);
+      setDeckB(data.deckA);
     });
     client.on("theirPick", data => {
-      setPickB(data);
+      console.log("pick:", data);
+      if (data !== null) {
+        setPickB(data);
+      }
     });
+    client.on("theyConnect", data => {
+      console.log(data);
+    });
+
+    client.emit("initDeck", {deckA, deckB}); // send table config on load
   }, []);
+
   useEffect(() => {
-    if (pickA !== null) {
-      client.emit("myPick", pickA);
-    }
+    client.emit("myPick", pickA);
   }, [pickA]);
-  useEffect(() => {
-    client.emit("myDeck", deckA);
-  }, [deckA]);
+
+  // useEffect(() => {
+    
+  // }, [pickA]);
 
   const computerPick = () => {
     setPickB(computerPlayer(handB));
