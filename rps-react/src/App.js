@@ -1,60 +1,37 @@
 import "./styles.css";
-
-import { useState } from "react";
-import useEvaluate from "./hooks/useEvaluate";
-import Hand from "./components/Hand";
-import Deck from "./components/Deck";
-import TurnResult from "./components/TurnResult";
+// import{Browser}
 import GameBoard from "./components/GameBoard"
-
-import { setHand, shuffle, computerPlayer } from "./helpers/helpers";
-import { deck } from "./data/deck";
-
 import Header from "./components/Header";
+import { useState } from "react";
 
 export default function App() {
-  // const [pickA, setPickA] = useState(null); // pick index of hand
-  // const [pickB, setPickB] = useState(null);
-  // const [deckA, setDeckA] = useState(shuffle(deck, 4));
-  // const [deckB, setDeckB] = useState(shuffle(deck, 4));
-  // const { yourScore, theirScore, complexEval, resetScore } = useEvaluate();
+  const [game_mode, set_game_mode] = useState(null)
+  // let game_mode = null;
 
-  // const handA = setHand(deckA);
-  // const handB = setHand(deckB);
-
-  // const computerPick = () => {
-  //   setPickB(computerPlayer(handB));
-  // };
-
-  // const nextTurn = () => {
-  //   setDeckA((prev) => {
-  //     const newArr = [...prev];
-  //     newArr.splice(pickA, 1);
-  //     return newArr;
-  //   });
-  //   setDeckB((prev) => {
-  //     const newArr = [...prev];
-  //     newArr.splice(pickB, 1);
-  //     return newArr;
-  //   });
-  //   setPickA(null);
-  //   setPickB(null);
-  //   complexEval(handA[pickA], handB[pickB]);
-  // };
-
-  // const newGame = () => {
-  //   setPickA(null);
-  //   setPickB(null);
-  //   setDeckA(shuffle(deck, 4));
-  //   setDeckB(shuffle(deck, 4));
-  //   resetScore();
-  // };
-
+const gameModer = (e) =>{
+  // console.log(e.target.innerText)
+  set_game_mode(e.target.innerText)
+  
+}
+ 
   return (
     <div className="App">
-       <Header  />
-      <GameBoard />
-      </div>
+      <br />
+      {game_mode == null && 
+
+         <div>
+         <button onClick={gameModer}>Solo</button>
+    
+         <button onClick={gameModer}>Match</button>
+       </div>
+       
+      }
+
+{game_mode == "Solo" && 
+       <GameBoard />}
+
+    </div>
+    
 
 
 
