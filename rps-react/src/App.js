@@ -37,7 +37,7 @@ export default function App() {
 
     client.on("theyConnect", data => {
       // should check if someone else is playing; if not computer picks
-      setHasOpponent(data);
+      // setHasOpponent(data);
     });
 
     client.emit("initDeck", {deckA, deckB}); // send table config on load
