@@ -5,10 +5,10 @@ import Hand from "./Hand";
 import Deck from "./Deck";
 import TurnResult from "./TurnResult";
 import { setHand, shuffle, computerPlayer } from "../helpers/helpers";
-import { deck } from "../data/deck";const [pickA, setPickA] = useState(null); // pick index of hand
+import { deck } from "../data/deck";
   
 export default function GameBoard() {
-
+  const [pickA, setPickA] = useState(null); // pick index of hand
 const [pickB, setPickB] = useState(null);
   const [deckA, setDeckA] = useState(shuffle(deck, 4));
   const [deckB, setDeckB] = useState(shuffle(deck, 4));

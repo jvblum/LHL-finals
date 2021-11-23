@@ -1,5 +1,12 @@
 import React from "react";
-
+import GameBoard from "./GameBoard";
+const newGame = () => {
+  setPickA(null);
+  setPickB(null);
+  setDeckA(shuffle(deck, 4));
+  setDeckB(shuffle(deck, 4));
+  resetScore();
+};
 const Header = () => {
   return (
     <div className="header">
@@ -11,11 +18,11 @@ const Header = () => {
       <div className="score-box">
         <span>Score</span>
         <div>
-          <button >New Game</button>
+          <button onClick={newGame}>New Game</button>
         </div>
       </div>
     </div>
   );
 };
-// onClick={newGame}
+// 
 export default Header;
