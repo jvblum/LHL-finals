@@ -23,15 +23,13 @@ export default function App() {
     // listeners
     client.on("initDeck", data => {
       // init deck from set table config
-      console.log('data', data);
       setDeckA(data.deckB);
       setDeckB(data.deckA);
-    });
+    }); // the game is dumb now; it just init decks and not update
     client.on("theirPick", data => {
-      console.log("pick:", data);
-      if (data !== null) {
+      // if (data !== null) {
         setPickB(data);
-      }
+      // }
     });
     client.on("theyConnect", data => {
       console.log(data);
@@ -44,27 +42,27 @@ export default function App() {
     client.emit("myPick", pickA);
   }, [pickA]);
 
-  // useEffect(() => {
-    
-  // }, [pickA]);
-
   const computerPick = () => {
     setPickB(computerPlayer(handB));
   };
 
   const nextTurn = () => {
+    const yourPick = pickA;
+    const theirPick = pickB;
+
+    setPickA(null);
+    // setPickB(null); only setPickB if computer
+
     setDeckA((prev) => {
       const newArr = [...prev];
-      newArr.splice(pickA, 1);
+      newArr.splice(yourPick, 1);
       return newArr;
     });
     setDeckB((prev) => {
       const newArr = [...prev];
-      newArr.splice(pickB, 1);
+      newArr.splice(theirPick, 1);
       return newArr;
     });
-    setPickA(null);
-    setPickB(null);
     complexEval(handA[pickA], handB[pickB]);
   };
 

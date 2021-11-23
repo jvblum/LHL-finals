@@ -70,3 +70,8 @@
   /* background-size: contain; */
   /* background-position: center; */
 }
+
+.Pick img {
+  height: 96px;
+  width: 96px;
+}
