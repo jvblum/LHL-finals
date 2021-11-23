@@ -1,5 +1,4 @@
 import Card from "./Card";
-// import "./Hand.css";
 
 export default function Hand(props) {
   const hand = [...props.hand].map((card, index) => (

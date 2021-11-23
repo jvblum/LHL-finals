@@ -1,26 +1,16 @@
-import { evaluate } from "../helpers/evaluate"; // this import might not be necessary
-
-//ideally, this is a pop-up window that closes when clicked
 export default function TurnResult(props) {
-  const { nextTurn, yourHand, theirHand, setResults } = props;
-
-  const yourPick = yourHand[props.yourPick];
-  const theirPick = theirHand[props.theirPick];
-  const message = evaluate(yourPick, theirPick);
-  console.log(message);
-    setTimeout(() => {
-      nextTurn();
-    }, 2000);
+  const { result, setResult } = props;
+  const closeWindow = () => {
+    setResult(null);
+  };
 
   return (
     <div>
-      <button className="next">
+      <button className="next" onClick={closeWindow}>
         <p className="Pick">
-          <img src={yourPick.img} alt={`${yourPick.type} + ${yourPick.rating}`} />
-          <span>-</span>
-          <img src={theirPick.img} alt={`${theirPick.type} + ${theirPick.rating}`} />
+          <i>{result.pickA.type}</i> - <b>{result.pickB.type}</b>
         </p>
-        <div className="result">{message}</div>
+        <div className="result">{result.message}</div>
       </button>
     </div>
   );

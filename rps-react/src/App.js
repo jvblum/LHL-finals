@@ -7,6 +7,7 @@ import Deck from "./components/Deck";
 import TurnResult from "./components/TurnResult";
 
 import { setHand, shuffle, computerPlayer } from "./helpers/helpers";
+import { evaluate } from "./helpers/evaluate";
 import { deck } from "./data/deck";
 
 import socketIOClient from "socket.io-client";
@@ -17,6 +18,8 @@ export default function App() {
   const [pickB, setPickB] = useState(null);
   const [deckA, setDeckA] = useState(shuffle(deck, 4));
   const [deckB, setDeckB] = useState(shuffle(deck, 4));
+  const [result, setResult] = useState(null);
+  // const [hasOpponent, setHasOpponent] = useState(false);
   const { yourScore, theirScore, complexEval, resetScore } = useEvaluate();
 
   useEffect(() => {
@@ -26,45 +29,51 @@ export default function App() {
       setDeckA(data.deckB);
       setDeckB(data.deckA);
     }); // the game is dumb now; it just init decks and not update
+
     client.on("theirPick", data => {
-      // if (data !== null) {
-        setPickB(data);
-      // }
+      // listens for opponent picks
+      setPickB(data);
     });
+
     client.on("theyConnect", data => {
-      console.log(data);
+      // should check if someone else is playing; if not computer picks
+      // setHasOpponent(data);
     });
 
     client.emit("initDeck", {deckA, deckB}); // send table config on load
   }, []);
 
   useEffect(() => {
-    client.emit("myPick", pickA);
+    // if (hasOpponent) { // this doesn't work
+      client.emit("myPick", pickA);
+    // } else {
+    //   setPickB(computerPlayer(handB));
+    // }
   }, [pickA]);
 
-  const computerPick = () => {
-    setPickB(computerPlayer(handB));
-  };
-
-  const nextTurn = () => {
-    const yourPick = pickA;
-    const theirPick = pickB;
-
-    setPickA(null);
-    // setPickB(null); only setPickB if computer
-
+  const cycleCards = () => {
     setDeckA((prev) => {
       const newArr = [...prev];
-      newArr.splice(yourPick, 1);
+      newArr.splice(pickA, 1);
       return newArr;
     });
     setDeckB((prev) => {
       const newArr = [...prev];
-      newArr.splice(theirPick, 1);
+      newArr.splice(pickB, 1);
       return newArr;
     });
-    complexEval(handA[pickA], handB[pickB]);
   };
+
+  useEffect(() => {
+    if (Number.isInteger(pickA) && Number.isInteger(pickB)) {
+      console.log("useEffect", handA[pickA]);
+      setResult(evaluate(handA[pickA], handB[pickB]));
+      complexEval(handA[pickA], handB[pickB]);
+      setPickA(null);
+      setPickB(null);
+      cycleCards();
+    }
+  }, [pickA, pickB, complexEval]);
 
   const newGame = () => {
     setPickA(null);
@@ -72,6 +81,7 @@ export default function App() {
     setDeckA(shuffle(deck, 4));
     setDeckB(shuffle(deck, 4));
     resetScore();
+    // resets game board, but not over sockets
   };
 
   const handA = setHand(deckA);
@@ -91,18 +101,10 @@ export default function App() {
       <hr />
       <div className="You">
         <p>Your Side</p>
-        <Hand hand={handA} setPick={setPickA} computerPick={computerPick} />
+        <Hand hand={handA} setPick={setPickA} />
         <Deck yourDeck={deckA} />
       </div>
-      {pickA !== null && pickB !== null && (
-        <TurnResult
-        nextTurn={nextTurn}
-        yourPick={pickA}
-        theirPick={pickB}
-        yourHand={handA}
-        theirHand={handB}
-        />
-        )}
+      {result && <TurnResult result={result} setResult={setResult} />}
       {!handA.length && !handB.length && (
         <div>
           <button onClick={newGame}>New Game</button>
