@@ -4,22 +4,34 @@ import useEvaluate from "../hooks/useEvaluate";
 import Hand from "./Hand";
 import Deck from "./Deck";
 import TurnResult from "./TurnResult";
+import History from "./History";
 import { setHand, shuffle, computerPlayer } from "../helpers/helpers";
 import { deck } from "../data/deck";
   
 export default function GameBoard() {
   const [pickA, setPickA] = useState(null); // pick index of hand
-const [pickB, setPickB] = useState(null);
+  const [pickB, setPickB] = useState(null);
   const [deckA, setDeckA] = useState(shuffle(deck, 4));
   const [deckB, setDeckB] = useState(shuffle(deck, 4));
+ 
+  const [computerHandHistory, setComputerHandHistory] = useState([])
+  const [humanHandHistory, sethumanHandHistory] = useState([])
+
   const { yourScore, theirScore, complexEval, resetScore } = useEvaluate();
 
   const handA = setHand(deckA);
   const handB = setHand(deckB);
 
+  
   const computerPick = () => {
-    setPickB(computerPlayer(handB));
-  };
+  let computer_pick = computerPlayer(handB);
+  setPickB(computer_pick);
+
+  // console.log(computerHandHistory)
+  setComputerHandHistory(computerHandHistory => [...computerHandHistory, handB[computer_pick]])
+};
+
+
 
   const nextTurn = () => {
     setDeckA((prev) => {
@@ -57,7 +69,7 @@ const [pickB, setPickB] = useState(null);
       </p>
       <hr />
       <p>Your Side</p>
-      <Hand hand={handA} setPick={setPickA} computerPick={computerPick} />
+      <Hand humanHandHistory={humanHandHistory} sethumanHandHistory={sethumanHandHistory} hand={handA} setPick={setPickA} computerPick={computerPick} />
       <Deck yourDeck={deckA} />
       {pickA !== null && pickB !== null && (
         <TurnResult
@@ -73,6 +85,7 @@ const [pickB, setPickB] = useState(null);
           <button onClick={newGame}>New Game</button>
         </div>
       )}
+      <History  humanHandHistory={humanHandHistory} computerHandHistory={computerHandHistory}  />
     </div>
   );
 }

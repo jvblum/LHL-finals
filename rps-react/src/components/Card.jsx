@@ -1,8 +1,11 @@
+
 export default function Card(props) {
-  const { card, index, setPick, computerPick } = props;
+  const { card, index, setPick, computerPick, sethumanHandHistory, humanHandHistory } = props;
   const onClick = () => {
     setPick(index);
+    // console.log(card)
 
+    sethumanHandHistory(humanHandHistory => [...humanHandHistory, card])
     // if computer player, updates with pickA change
     computerPick();
   };
