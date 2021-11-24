@@ -52,19 +52,21 @@ io.on("connection", (socket) => {
     const roomLimit = 2;
     const roomSize = io.sockets.adapter.rooms.get(room).size;
 
-    if (roomSize >= roomLimit) {
+    if (roomSize > roomLimit) {
       // if room is full, kick and send feedback
       socket.leave(room);
       socket.room = null;
     }
 
+    console.log("room size:", roomSize)
+    console.log(socket.room);
     if (socket.room) {
       gameListeners(socket.room);
       socket.on("leaveRoom", () => {
         socket.leave(room);
       })
     } else {
-      socket.emit("message", "Room is full."););
+      socket.emit("message", "Room is full.");
     }
   });
 

@@ -63,8 +63,10 @@ export default function App() {
     if (requestRoom) {
       if (room) {
         client.emit("joinRoom", room);
+        client.emit("initDeck", {deckA, deckB});
       } else {
         client.emit("publicRoom");
+        client.emit("initDeck", {deckA, deckB});
       }
       setRequestRoom(false);
     }
