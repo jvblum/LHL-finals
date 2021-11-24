@@ -19,6 +19,8 @@ export default function App() {
   const [deckA, setDeckA] = useState(shuffle(deck, 4));
   const [deckB, setDeckB] = useState(shuffle(deck, 4));
   const [result, setResult] = useState(null);
+  const [room, setRoom] = useState("");
+  const [requestRoom, setRequestRoom] = useState(false);
   // const [hasOpponent, setHasOpponent] = useState(false);
   const { yourScore, theirScore, complexEval, resetScore } = useEvaluate();
 
@@ -40,6 +42,12 @@ export default function App() {
       // setHasOpponent(data);
     });
 
+    client.on("publicRoomName", data => {
+      setRoom(data);
+      // should check if someone else is playing; if not computer picks
+      // setHasOpponent(data);
+    });
+
     client.emit("initDeck", {deckA, deckB}); // send table config on load
   }, []);
 
@@ -50,6 +58,17 @@ export default function App() {
     //   setPickB(computerPlayer(handB));
     // }
   }, [pickA]);
+
+  useEffect(() => {
+    if (requestRoom) {
+      if (room) {
+        client.emit("joinRoom", room);
+      } else {
+        client.emit("publicRoom");
+      }
+      setRequestRoom(false);
+    }
+  }, [requestRoom]);
 
   const cycleCards = () => {
     setDeckA((prev) => {
@@ -98,6 +117,12 @@ export default function App() {
       <p>
         Your Score: {yourScore} | Their Score: {theirScore}
       </p>
+      <input type="text-field" value={room} placeholder="room name here" onChange={(e) => {
+        setRoom(e.target.value);
+      }} />
+      <button onClick={() => {
+        setRequestRoom(true);
+      }}>join room</button>
       <hr />
       <div className="You">
         <p>Your Side</p>
