@@ -24,16 +24,8 @@ export default function useEvaluate() {
 
     if (rules[pickB.type].includes(pickA.type)) {
       setTheirScore((prev) => prev + point);
-      // setMessage(`Player B Wins! + ${point}`);
     } // specific to case where pickB === defend
 
-    if (pickA.type === pickB.type) {
-      // setMessage("Tie Game!");
-    }
-
-    if (pickA.type === defend || pickB.type === defend) {
-      // setMessage("Tie Game!");
-    } // comes after so "defend beats "might" before it forces a tie
   }; // accepts pick objects and returns with results; will incorporate multiplier
 
   const resetScore = () => {
