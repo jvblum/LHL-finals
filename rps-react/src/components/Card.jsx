@@ -1,5 +1,5 @@
 export default function Card(props) {
-  const { card, index, setPick, computerPick } = props;
+  const { card, index, setPick } = props;
   const onClick = () => {
     setPick(index);
   };
