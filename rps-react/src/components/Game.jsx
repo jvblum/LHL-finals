@@ -1,6 +1,7 @@
 import Hand from "./Hand";
 import Deck from "./Deck";
 import TurnResult from "./TurnResult";
+import GameResult from "./GameResult";
 
 import useGame from "../hooks/useGame";
 
@@ -47,14 +48,7 @@ export default function Game() {
         <Deck yourDeck={deckA} />
       </div>
       {turnResult && <TurnResult result={turnResult} setResult={setTurnResult} />}
-      {gameResult && (
-        <div>
-          <button onClick={() => {
-            setGameResult();
-            startNewGame();
-          }}>New Game</button>
-        </div>
-      )}
+      {!turnResult && gameResult && <GameResult result={gameResult} yourScore={yourScore} theirScore={theirScore} setResult={setGameResult} newGame={startNewGame} />}
     </div>
   );
 }
