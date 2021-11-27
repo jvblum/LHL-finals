@@ -2,7 +2,9 @@
   font-family: sans-serif;
   text-align: center;
 }
-
+html, body, #root, #root>div {
+  height: 100%
+}
 /*  */
 
 .Pick {
@@ -74,4 +76,13 @@
 .Pick img {
   height: 96px;
   width: 96px;
+}
+
+
+.landing,body,h1,h5 {font-family: "Raleway", sans-serif}
+.bgimg {
+  background-image: url('./images/landing.jpg');
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
 }

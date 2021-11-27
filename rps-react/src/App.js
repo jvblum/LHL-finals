@@ -1,9 +1,9 @@
 import "./styles.css";
 
-import Game from "./components/Game";
+import Landing from "./components/Landing";
 
 export default function App() {
   return (
-    <Game />
+    <Landing />
   );
 }
