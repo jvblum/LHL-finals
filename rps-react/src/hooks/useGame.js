@@ -60,6 +60,7 @@ export default function useGame() {
     } else {
       didMount.current = true;
     }
+  // eslint-disable-next-line
   }, [pickA]);
 
   useEffect(() => {
@@ -73,6 +74,7 @@ export default function useGame() {
       }
       setRequestRoom(false);
     }
+  // eslint-disable-next-line
   }, [requestRoom]);
 
   useEffect(() => {
@@ -88,7 +90,7 @@ export default function useGame() {
       client.emit("initDeck", {deckA: newDeckA, deckB: newDeckB});
       setResetGame(false);
     }
-
+  // eslint-disable-next-line
   }, [resetGame]);
 
   useEffect(() => {
@@ -117,6 +119,7 @@ export default function useGame() {
     if (!deckA.length && !deckB.length) {
       setGameResult(gameEvaluate(yourScore, theirScore));
     }
+  // eslint-disable-next-line
   }, [pickA, pickB]);
 
   const handA = setHand(deckA);
