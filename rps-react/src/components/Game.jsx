@@ -3,8 +3,10 @@ import Deck from "./Deck";
 import TurnResult from "./TurnResult";
 
 import useGame from "../hooks/useGame";
+import Join from "./Join";
 
-export default function Game() {
+export default function Game(props) {
+  const {gameType} = props;
   const {
     setPickA,
     setResult,
@@ -19,9 +21,11 @@ export default function Game() {
     yourScore,
     theirScore,
     room
-  } = useGame();;
+  } = useGame();
 
-  return (
+  const joinExistingGame = gameType === 'join';
+
+  return (joinExistingGame ? <Join  roomChangeListener={roomChangeListener} requestJoinRoom={requestJoinRoom} room={room} /> : (
     <div className="App">
       <div className="Them">
         <Deck yourDeck={deckB} />
@@ -32,12 +36,6 @@ export default function Game() {
       <p>
         Your Score: {yourScore} | Their Score: {theirScore}
       </p>
-      <input type="text-field" value={room} placeholder="room name here" onChange={(e) => {
-        roomChangeListener(e.target.value);
-      }} />
-      <button onClick={() => {
-        requestJoinRoom(true);
-      }}>join room</button>
       <hr />
       <div className="You">
         <p>Your Side</p>
@@ -51,5 +49,5 @@ export default function Game() {
         </div>
       )}
     </div>
-  );
+  ))
 }
