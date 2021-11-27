@@ -15,7 +15,8 @@ export default function Card(props) {
       }}
       disabled
     >
-      {top ? top.type + top.rating : "0"}
+      {deck.length}
+      {/* {top ? top.type + top.rating : "0"} */}
     </button>
   );
 }

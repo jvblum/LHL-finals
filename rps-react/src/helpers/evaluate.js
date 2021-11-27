@@ -29,11 +29,11 @@ export const gameEvaluate = (yourScore, theirScore) => {
   const point = [yourScore, theirScore].sort((a, b) => b - a).reduce((a, b) => a - b);
 
   if (yourScore > theirScore) {
-    message = `You Win by ${point}pt${point !== 1 && 's'}!`;
+    message = `You Win by ${point}pt${point !== 1 ? 's' : ''}!`;
   }
 
   if (yourScore < theirScore) {
-    message = `They Win by ${point}pt${point !== 1 && 's'}!`;
+    message = `They Win by ${point}pt${point !== 1 ? 's' : ''}!`;
   }
 
   return { message, point };
