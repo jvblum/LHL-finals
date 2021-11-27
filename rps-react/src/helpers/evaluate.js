@@ -26,14 +26,14 @@ export const turnEvaluate = (pickA, pickB) => {
 
 export const gameEvaluate = (yourScore, theirScore) => {
   let message = "Tie Game!";
-  const point = yourScore - theirScore;
+  const point = [yourScore, theirScore].sort((a, b) => b - a).reduce((a, b) => a - b);
 
   if (yourScore > theirScore) {
-    message = `You Win! ${point < 0 ? '' : '+'}${point}`;
+    message = `You Win by ${point}pt${point !== 1 ? 's' : ''}!`;
   }
 
   if (yourScore < theirScore) {
-    message = `They Win! + ${point}`;
+    message = `They Win by ${point}pt${point !== 1 ? 's' : ''}!`;
   }
 
   return { message, point };
