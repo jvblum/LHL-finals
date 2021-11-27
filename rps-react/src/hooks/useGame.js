@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import useEvaluate from "./useEvaluate";
 // import useSocket from "./hooks/useSocket";
 
@@ -54,12 +54,19 @@ export default function useGame() {
     // probably unnecessary
   }, []);
 
+  const didMount = useRef(false);
   useEffect(() => {
-    // if (hasOpponent) { // this doesn't work
-      client.emit("myPick", pickA);
-    // } else {
-    //   setPickB(computerPlayer(handB));
-    // }
+    if (didMount.current) {
+      // skip first render
+      if (room) {
+        // conditional for when a player is in a room
+        client.emit("myPick", pickA);
+      } else {
+        setPickB(computerPlayer(handB));
+      }
+    } else {
+      didMount.current = true;
+    }
   }, [pickA]);
 
   useEffect(() => {
@@ -107,6 +114,11 @@ export default function useGame() {
     resetScore();
     // resets game board, but not over sockets
   };
+
+  // useEffect(() => {
+  //   client.emit("initDeck", {deckA, deckB});
+  // }, [newGame]);
+
 
   const handA = setHand(deckA);
   const handB = setHand(deckB);
