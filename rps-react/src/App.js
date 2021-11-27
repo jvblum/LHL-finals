@@ -1,57 +1,39 @@
 import "./styles.css";
-
-import Hand from "./components/Hand";
-import Deck from "./components/Deck";
-import TurnResult from "./components/TurnResult";
-
-import useGame from "./hooks/useGame";
+// import{Browser}
+import GameBoard from "./components/GameBoard"
+import Header from "./components/Header";
+import { useState } from "react";
 
 export default function App() {
-  const {
-    setPickA,
-    setResult,
-    roomChangeListener,
-    requestJoinRoom,
-    newGame,
-    handA,
-    handB,
-    deckA,
-    deckB,
-    result,
-    yourScore,
-    theirScore,
-    room
-  } = useGame();;
+  const [game_mode, set_game_mode] = useState(null)
+  // let game_mode = null;
 
+const gameModer = (e) =>{
+  // console.log(e.target.innerText)
+  set_game_mode(e.target.innerText)
+  
+}
+ 
   return (
     <div className="App">
-      <div className="Them">
-        <Deck yourDeck={deckB} />
-        <Hand hand={handB} theirHand={true} />
-        <p>Their Side </p>
-      </div>
-    <hr />
-      <p>
-        Your Score: {yourScore} | Their Score: {theirScore}
-      </p>
-      <input type="text-field" value={room} placeholder="room name here" onChange={(e) => {
-        roomChangeListener(e.target.value);
-      }} />
-      <button onClick={() => {
-        requestJoinRoom(true);
-      }}>join room</button>
-      <hr />
-      <div className="You">
-        <p>Your Side</p>
-        <Hand hand={handA} setPick={setPickA} />
-        <Deck yourDeck={deckA} />
-      </div>
-      {result && <TurnResult result={result} setResult={setResult} />}
-      {!handA.length && !handB.length && (
-        <div>
-          <button onClick={newGame}>New Game</button>
-        </div>
-      )}
+      <br />
+      {game_mode == null && 
+
+         <div>
+         <button onClick={gameModer}>Solo</button>
+    
+         <button onClick={gameModer}>Match</button>
+       </div>
+       
+      }
+
+{game_mode == "Solo" && 
+       <GameBoard />}
+
     </div>
+    
+
+
+
   );
 }

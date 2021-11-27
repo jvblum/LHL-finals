@@ -9,6 +9,8 @@ export default function Hand(props) {
       setPick={props.setPick}
       computerPick={props.computerPick}
       theirHand={props.theirHand}
+      sethumanHandHistory={props.sethumanHandHistory}
+      humanHandHistory={props.humanHandHistory}
     />
   ));
   return <div className="Hand">{hand}</div>;
