@@ -80,7 +80,7 @@ export default function useGame() {
       setPickA(null);
       setPickB(null);
       resetScore();
-      
+
       const newDeckA = shuffle(deck, 4);
       const newDeckB = shuffle(deck, 4);
       setDeckA(newDeckA);

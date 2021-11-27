@@ -8,7 +8,10 @@ export default function TurnResult(props) {
     <div>
       <button className="next" onClick={closeWindow}>
         <p className="Pick">
-          <i>{result.pickA.type}</i> - <b>{result.pickB.type}</b>
+          <img className="Card" src={result.pickA.img} />
+          <span>vs</span>
+          <img className="Card" src={result.pickB.img} />
+          {/* <i>{result.pickA.type}</i> - <b>{result.pickB.type}</b> */}
         </p>
         <div className="result">{result.message}</div>
       </button>

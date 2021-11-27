@@ -14,11 +14,11 @@ export const turnEvaluate = (pickA, pickB) => {
   const point = pickA.rating * pickB.rating;
 
   if (rules[pickA.type].includes(pickB.type)) {
-    message = `Player A Wins! + ${point}`;
+    message = `You Win! + ${point}`;
   }
 
   if (rules[pickB.type].includes(pickA.type)) {
-    message = `Player B Wins! + ${point}`;
+    message = `They Win! + ${point}`;
   } // specific to case where pickB === defend
 
   return { pickA, pickB, message, point };

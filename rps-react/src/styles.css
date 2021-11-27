@@ -6,7 +6,9 @@
 /*  */
 
 .Pick {
-  font-size: 98px;
+  font-size: 32px;
+  justify-self: center;
+  align-self: center;
 }
 
 .result {
@@ -17,7 +19,7 @@
   font-size: 64px;
   width: 80px;
   height: 120px;
-  color: yellow;
+  color: rgb(149, 149, 0);
 
   background-position: center;
 }
