@@ -7,15 +7,17 @@ import useGame from "../hooks/useGame";
 export default function Game() {
   const {
     setPickA,
-    setResult,
+    setTurnResult,
+    setGameResult,
+    startNewGame,
     roomChangeListener,
     requestJoinRoom,
-    newGame,
     handA,
     handB,
     deckA,
     deckB,
-    result,
+    turnResult,
+    gameResult,
     yourScore,
     theirScore,
     room
@@ -44,10 +46,13 @@ export default function Game() {
         <Hand hand={handA} setPick={setPickA} />
         <Deck yourDeck={deckA} />
       </div>
-      {result && <TurnResult result={result} setResult={setResult} />}
-      {!handA.length && !handB.length && (
+      {turnResult && <TurnResult result={turnResult} setResult={setTurnResult} />}
+      {gameResult && (
         <div>
-          <button onClick={newGame}>New Game</button>
+          <button onClick={() => {
+            setGameResult();
+            startNewGame();
+          }}>New Game</button>
         </div>
       )}
     </div>
