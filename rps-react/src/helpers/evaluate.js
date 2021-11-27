@@ -1,6 +1,6 @@
 import { cardType } from "../data/cardType";
 
-export const evaluate = (pickA, pickB) => {
+export const turnEvaluate = (pickA, pickB) => {
   const { rock, paper, scissors, defend, might } = cardType;
   const rules = {
     [rock]: scissors,
@@ -23,3 +23,18 @@ export const evaluate = (pickA, pickB) => {
 
   return { pickA, pickB, message, point };
 }; // accepts pick objects and returns with results; will incorporate multiplier
+
+export const gameEvaluate = (yourScore, theirScore) => {
+  let message = "Tie Game!";
+  const point = yourScore - theirScore;
+
+  if (yourScore > theirScore) {
+    message = `You Win! ${point < 0 ? '' : '+'}${point}`;
+  }
+
+  if (yourScore < theirScore) {
+    message = `They Win! + ${point}`;
+  }
+
+  return { message, point };
+};
