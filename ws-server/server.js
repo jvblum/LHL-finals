@@ -25,22 +25,18 @@ for (let i = 0; i < numOfRooms; i++) {
 
 io.on("connection", (socket) => {
   console.log("New client connected");
-  socket.broadcast.emit("theyConnect", true);
 
   const gameListeners = (room) => {
     socket.on("initDeck", data => {
-      console.log("initDeck");
-      socket.to(room).emit("initDeck", data); // will change to room specific
+      socket.to(room).emit("initDeck", data);
     });
 
     socket.on("myDeck", data => {
-      // console.log("incoming deck:", "length:", data.length, "top:", data[0]);
-      socket.to(room).emit("theirDeck", data); // will change to room specific
+      socket.to(room).emit("theirDeck", data);
       // currently unused
     });
     socket.on("myPick", data => {
-      // console.log("incoming pick", data);
-      socket.to(room).emit("theirPick", data); // will change to room specific
+      socket.to(room).emit("theirPick", data);
     });
   }
 
@@ -58,13 +54,10 @@ io.on("connection", (socket) => {
       socket.room = null;
     }
 
-    console.log("room size:", roomSize)
-    console.log(socket.room);
     if (socket.room) {
       gameListeners(socket.room);
-      socket.on("leaveRoom", () => {
-        socket.leave(room);
-      })
+      io.to(socket.room).emit("opponentStatus", roomSize);
+
     } else {
       socket.emit("message", "Room is full.");
     }
@@ -89,17 +82,14 @@ io.on("connection", (socket) => {
       // if room is full, kick and send feedback
       socket.leave(room);
       socket.room = null;
-      console.log("cannot join room");
     };
 
     // if client stays
     if (socket.room) {
       gameListeners(socket.room);
       socket.emit("publicRoomName", socket.room);
+      io.to(socket.room).emit("opponentStatus", roomSize);
 
-      socket.on("leaveRoom", () => {
-        socket.leave(socket.room);
-      });
     } else {
       socket.emit("message", "All rooms are full.");
     }
@@ -107,7 +97,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    socket.broadcast.emit("theyConnect", false);
+    io.to(socket.room).emit("opponentStatus", false);
     console.log("Client disconnected");
   });
 });

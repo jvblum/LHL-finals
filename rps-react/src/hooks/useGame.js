@@ -19,7 +19,7 @@ export default function useGame() {
   const [room, setRoom] = useState("");
   const [requestRoom, setRequestRoom] = useState(false);
   const [resetGame, setResetGame] = useState(false);
-  // const [hasOpponent, setHasOpponent] = useState(false);
+  const [hasOpponent, setHasOpponent] = useState(false);
   const { yourScore, theirScore, complexEval, resetScore } = useEvaluate();
 
   useEffect(() => {
@@ -40,6 +40,18 @@ export default function useGame() {
       alert(data);
     });
 
+    client.on("opponentStatus", data => {
+      // listen for opponent presence; data is roomsize
+      console.log('status:', data);
+      setHasOpponent(data > 1 ? true : false);
+
+      if (data > 1) {
+        // if opponent is joining;
+        setPickB(null);
+        resetScore();
+      }
+    });
+
     client.on("publicRoomName", data => {
       setRoom(data);
       // should check if someone else is playing; if not computer picks
@@ -51,8 +63,8 @@ export default function useGame() {
   useEffect(() => {
     if (didMount.current) {
       // skip first render
-      if (room) {
-        // conditional for when a player is in a room
+      if (hasOpponent) {
+        // conditional for when another player is in a room
         client.emit("myPick", pickA);
       } else {
         setPickB(computerPlayer(handB));
@@ -90,7 +102,7 @@ export default function useGame() {
       client.emit("initDeck", {deckA: newDeckA, deckB: newDeckB});
       setResetGame(false);
     }
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [resetGame]);
 
   useEffect(() => {

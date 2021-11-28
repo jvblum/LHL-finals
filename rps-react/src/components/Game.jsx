@@ -35,11 +35,14 @@ export default function Game() {
       <p>
         Your Score: {yourScore} | Their Score: {theirScore}
       </p>
+      <p>{room ? `Room: ${room}` : `Playing solo`} </p>
       <input type="text-field" value={room} placeholder="room name here" onChange={(e) => {
         roomChangeListener(e.target.value);
       }} />
       <button onClick={() => {
         requestJoinRoom(true);
+        startNewGame();
+        // reset current game when joining new room
       }}>join room</button>
       <hr />
       <div className="You">
