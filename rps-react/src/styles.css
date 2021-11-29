@@ -17,10 +17,14 @@
 }
 
 .RoomStatus {
-  background-color: rgb(194, 194, 255);
+  background-color: rgb(233, 233, 255);
   padding: 16px;
   display: flex;
   justify-content: right;
+  font-weight: bold;
+  color: black;
+
+  background-image: url("./textures/batthern.png");
 }
 
 .RoomStatus span{
@@ -37,7 +41,8 @@
   /* color: rgb(210, 210, 0); */
   color: white;
 
-  background-color: rgb(100, 100, 100);;
+  background-color: rgb(100, 100, 100);
+  background-image: url('./textures/argyle.png');
   background-position: center;
 }
 

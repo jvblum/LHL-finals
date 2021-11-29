@@ -6,6 +6,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  background-color: #d8f3fd;
+  background-image: url("./textures/axiom-pattern.png");
 }
 
 code {
