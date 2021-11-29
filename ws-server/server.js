@@ -96,6 +96,14 @@ io.on("connection", (socket) => {
 
   });
 
+  socket.on("leaveRoom", () => {
+    if (socket.room) {
+      socket.leave(socket.room);
+      socket.room = null;
+      console.log("Client left room");
+    }
+  });
+
   socket.on("disconnect", () => {
     io.to(socket.room).emit("opponentStatus", false);
     console.log("Client disconnected");

@@ -17,7 +17,9 @@ export default function useGame() {
   const [turnResult, setTurnResult] = useState(null);
   const [gameResult, setGameResult] = useState(null);
   const [room, setRoom] = useState("");
+  const [roomListener, setRoomListener] = useState("");
   const [requestRoom, setRequestRoom] = useState(false);
+  const [leaveRoom, setLeaveRoom] = useState(false);
   const [resetGame, setResetGame] = useState(false);
   const [hasOpponent, setHasOpponent] = useState(false);
   const { yourScore, theirScore, complexEval, resetScore } = useEvaluate();
@@ -134,17 +136,30 @@ export default function useGame() {
   // eslint-disable-next-line
   }, [pickA, pickB]);
 
+  useEffect(() => {
+    client.emit("leaveRoom");
+    setLeaveRoom(false);
+  }, [leaveRoom]);
+
   const handA = setHand(deckA);
   const handB = setHand(deckB);
 
   const roomChangeListener = value => {
     // takes element value to setRoom
-    setRoom(value);
+    // setRoom(value);
+    setRoomListener(value);
   }
 
   const requestJoinRoom = () => {
     // triggers useEffect with requestRoom dependency
     setRequestRoom(true);
+    setRoom(roomListener);
+  }
+
+  const requestLeaveRoom = () => {
+    // triggers useEffect with leaveRoom dependency
+    setLeaveRoom(true);
+    setRoom("");
   }
 
   const startNewGame = () => {
@@ -159,6 +174,7 @@ export default function useGame() {
     startNewGame,
     roomChangeListener,
     requestJoinRoom,
+    requestLeaveRoom,
     handA,
     handB,
     deckA,
@@ -167,6 +183,8 @@ export default function useGame() {
     gameResult,
     yourScore,
     theirScore,
-    room
+    room,
+    roomListener,
+    hasOpponent
   };
 };
