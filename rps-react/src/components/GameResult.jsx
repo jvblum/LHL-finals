@@ -6,9 +6,19 @@ export default function GameResult(props) {
     newGame();
   }
 
+  const resultColors = {
+    you: "#d8f3fd",
+    them: "rgb(255, 228, 233)",
+    none: ""
+  };
+
   return (
     <div className="GameResult">
-      <button className="next" onClick={closeGameResult}>
+      <button
+        className="next"
+        onClick={closeGameResult}
+        style={{backgroundColor: resultColors[result.winner]}}
+      >
         <p className="Pick">
           {`${yourScore} - ${theirScore}`}
         </p>

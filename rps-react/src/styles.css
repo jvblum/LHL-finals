@@ -6,6 +6,12 @@
 
 /*  */
 
+.Them {
+ background-color: rgb(255, 228, 233);
+ background-image: url("./textures/axiom-pattern.png");
+ padding-bottom: 4px;
+}
+
 .Pick {
   font-size: 32px;
   justify-self: center;
@@ -168,4 +174,12 @@
 
 .Card:hover .card-info {
   visibility: visible;
+}
+
+.GameResult button {
+  background-image: url("./textures/axiom-pattern.png");
+}
+
+.TurnResult button {
+  background-image: url("./textures/axiom-pattern.png");
 }

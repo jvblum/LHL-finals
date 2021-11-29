@@ -45,7 +45,6 @@ export default function Game() {
         <Hand hand={handB} theirHand={true} />
         <p>Them: <b>{theirScore}</b></p>
       </div>
-    <hr />
       <div className="You">
         <p>You: <b>{yourScore}</b> </p>
         <Hand hand={handA} setPick={setPickA} />
