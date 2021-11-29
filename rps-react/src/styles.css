@@ -1,6 +1,7 @@
 .App {
   font-family: sans-serif;
   text-align: center;
+
 }
 
 /*  */
@@ -16,17 +17,25 @@
 }
 
 .Deck {
-  font-size: 64px;
+  font-size: 24px;
   width: 80px;
   height: 120px;
-  color: rgb(210, 210, 0);
+  margin: 16px;
+  /* color: rgb(210, 210, 0); */
+  color: white;
 
+  background-color: rgb(100, 100, 100);;
   background-position: center;
 }
 
+.Deck img {
+  width: 48px;
+  height: 48px;
+}
+
 .next {
-  width: 100vw;
-  height: 100vw;
+  width: 100%;
+  height: 100%;
   /* opacity: 20%; */
   position: absolute;
 
