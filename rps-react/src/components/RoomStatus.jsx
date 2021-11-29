@@ -12,7 +12,7 @@ export default function RoomStatus(props) {
     <div className="RoomStatus">
     {room &&
     <>
-      <span>Room: {room} {!hasOpponent && "(Waiting for opponent...)"}</span>
+      <span>Room: {room} {hasOpponent ? "(Playing with opponent)" : "(Waiting for opponent...)"}</span>
       <button onClick={() => {
         requestLeaveRoom();
         // reset current game when joining new room
