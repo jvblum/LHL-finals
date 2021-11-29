@@ -7,6 +7,7 @@ export default function Card(props) {
   // there is no hand state
   // the first three card in the deck are hand cards
   // the top of the deck is the fourth card
+  // props.you conditional to show deck content
 
   return (
     <button
@@ -18,7 +19,7 @@ export default function Card(props) {
     >
       {deck.length}
       {/* {top ? top.type + top.rating : "0"} */}
-      <div className="deck-info">{deckInfo}</div>
+      {props.you && <div className="deck-info">{deckInfo}</div>}
     </button>
   );
 }

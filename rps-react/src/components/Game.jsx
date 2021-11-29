@@ -48,7 +48,7 @@ export default function Game() {
       <div className="You">
         <p>Your Side</p>
         <Hand hand={handA} setPick={setPickA} />
-        <Deck yourDeck={deckA} />
+        <Deck yourDeck={deckA} you={true} />
       </div>
       {turnResult && <TurnResult result={turnResult} setResult={setTurnResult} />}
       {!turnResult && gameResult && <GameResult result={gameResult} yourScore={yourScore} theirScore={theirScore} setResult={setGameResult} newGame={startNewGame} />}
