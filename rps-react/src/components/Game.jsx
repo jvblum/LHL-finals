@@ -43,15 +43,11 @@ export default function Game() {
       <div className="Them">
         <Deck yourDeck={deckB} />
         <Hand hand={handB} theirHand={true} />
-        <p>Their Side </p>
+        <p>Them: <b>{theirScore}</b></p>
       </div>
     <hr />
-      <p>
-        Your Score: {yourScore} | Their Score: {theirScore}
-      </p>
-    <hr />
       <div className="You">
-        <p>Your Side</p>
+        <p>You: <b>{yourScore}</b> </p>
         <Hand hand={handA} setPick={setPickA} />
         <Deck yourDeck={deckA} you={true} />
       </div>
