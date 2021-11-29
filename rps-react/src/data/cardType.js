@@ -1,7 +1,7 @@
 export const cardType = {
-  rock: "R",
-  paper: "P",
-  scissors: "S",
-  defend: "D",
-  might: "M"
+  rock: "ROCK",
+  paper: "PAPER",
+  scissors: "SCISSORS",
+  defend: "DEFEND",
+  might: "MIGHT"
 }
