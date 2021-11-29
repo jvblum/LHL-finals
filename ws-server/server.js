@@ -66,13 +66,14 @@ io.on("connection", (socket) => {
   socket.on("publicRoom", () => {
     // input not necessary;
     const roomLimit = 2;
+    let roomSize;
 
     // loop through public rooms to join
     for (const room of rooms) {
       // join first to establish connection
       socket.join(room);
       socket.room = room;
-      const roomSize = io.sockets.adapter.rooms.get(room).size;
+      roomSize = io.sockets.adapter.rooms.get(room).size;
 
       if (roomSize <= roomLimit) {
         // if room is not full, break loop;
