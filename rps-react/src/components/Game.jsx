@@ -2,6 +2,7 @@ import Hand from "./Hand";
 import Deck from "./Deck";
 import TurnResult from "./TurnResult";
 import GameResult from "./GameResult";
+import RoomStatus from "./RoomStatus";
 
 import useGame from "../hooks/useGame";
 import { deck } from "../data/deck";
@@ -30,6 +31,15 @@ export default function Game() {
 
   return (
     <div className="App">
+      <RoomStatus
+        room={room}
+        roomListener={roomListener}
+        roomChangeListener={roomChangeListener}
+        hasOpponent={hasOpponent}
+        requestLeaveRoom={requestLeaveRoom}
+        requestJoinRoom={requestJoinRoom}
+        startNewGame={startNewGame}
+      />
       <div className="Them">
         <Deck yourDeck={deckB} />
         <Hand hand={handB} theirHand={true} />
@@ -39,27 +49,7 @@ export default function Game() {
       <p>
         Your Score: {yourScore} | Their Score: {theirScore}
       </p>
-      {room &&
-      <>
-        <p>Room: {room} {!hasOpponent && "(Waiting for opponent...)"}</p>
-        <button onClick={() => {
-          requestLeaveRoom();
-          // reset current game when joining new room
-        }}>leave room</button>
-      </>}
-      {!room &&
-      <>
-        <p>Playing solo</p>
-        <input type="text-field" value={roomListener} placeholder="room name here" onChange={(e) => {
-          roomChangeListener(e.target.value);
-        }} />
-        <button onClick={() => {
-          requestJoinRoom();
-          startNewGame();
-          // reset current game when joining new room
-        }}>join room</button>
-      </>}
-      <hr />
+    <hr />
       <div className="You">
         <p>Your Side</p>
         <Hand hand={handA} setPick={setPickA} />
