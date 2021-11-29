@@ -1,11 +1,13 @@
 export default function Card(props) {
   const deck = props.yourDeck;
   const top = deck[3];
+  const deckInfo = [...deck].slice(3).map((card, index) => {
+    return <span key={index}><img src={card.img}/><div>{index}</div></span>;
+  })
+  console.log(deckInfo)
   // there is no hand state
   // the first three card in the deck are hand cards
   // the top of the deck is the fourth card
-
-  // onclick - view deck
 
   return (
     <button
@@ -17,6 +19,7 @@ export default function Card(props) {
     >
       {deck.length}
       {/* {top ? top.type + top.rating : "0"} */}
+      <div className="deck-info">{deckInfo}</div>
     </button>
   );
 }

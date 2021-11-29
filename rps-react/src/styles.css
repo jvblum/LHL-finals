@@ -77,3 +77,40 @@
   height: 96px;
   width: 96px;
 }
+
+/* implement tooltip */
+/* Tooltip text */
+.Deck .deck-info {
+  visibility: hidden;
+  width: fit-content;
+  background-color: rgb(83, 52, 52);
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 6px;
+
+  font-size: 18px;
+
+  position: relative;
+  z-index: 1;
+  top: -50%;
+  left: 150%;
+
+  display: flex;
+  flex-direction: row;
+
+}
+
+.Deck .deck-info span {
+  margin: 0 3px;
+}
+
+.Deck .deck-info img{
+  width: 24px;
+  height: 24px;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.Deck:hover .deck-info {
+  visibility: visible;
+}
