@@ -98,6 +98,8 @@ io.on("connection", (socket) => {
 
   socket.on("leaveRoom", () => {
     if (socket.room) {
+      io.to(socket.room).emit("opponentStatus", false);
+      socket.to(socket.room).emit("message", "Opponent left");
       socket.leave(socket.room);
       socket.room = null;
       console.log("Client left room");
