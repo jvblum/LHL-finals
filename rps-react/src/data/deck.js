@@ -66,10 +66,10 @@ const deckTemplate = [
   4, // rock1
   4, // paper1
   4, // scissors1
-  1, // rock2
-  1, // paper2,
-  1, // scissors2:
-  3, // defend
+  2, // rock2
+  2, // paper2,
+  2, // scissors2:
+  2, // defend
   2 // might:
 ]; // awkward implementation; consider restructuring ref
 
