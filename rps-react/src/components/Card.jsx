@@ -12,6 +12,7 @@ export default function Card(props) {
         disabled={props.theirHand}
         style={{ background: `url(${card.img})` }}
       >
+      <div className="card-info"><p>{card.type} LVL {card.rating}</p></div>
       </button>
     </div>
   );

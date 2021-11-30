@@ -84,6 +84,7 @@ const generateDeck = (template, reference) => {
 }
 
 export const deck = generateDeck(deckTemplate, ref);
+// export const deck = [ref[1], ref[2], ref[3]];
 
 // export const deck = [
 //   ref[0],

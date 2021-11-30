@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import useEvaluate from "./useEvaluate";
 // import useSocket from "./hooks/useSocket";
 
 import { setHand, shuffle, computerPlayer } from "../helpers/helpers";
-import { evaluate } from "../helpers/evaluate";
+import { turnEvaluate, gameEvaluate } from "../helpers/evaluate";
 import { deck } from "../data/deck";
 
 import socketIOClient from "socket.io-client";
@@ -14,10 +14,14 @@ export default function useGame() {
   const [pickB, setPickB] = useState(null);
   const [deckA, setDeckA] = useState(shuffle(deck, 4));
   const [deckB, setDeckB] = useState(shuffle(deck, 4));
-  const [result, setResult] = useState(null);
+  const [turnResult, setTurnResult] = useState(null);
+  const [gameResult, setGameResult] = useState(null);
   const [room, setRoom] = useState("");
+  const [roomListener, setRoomListener] = useState("");
   const [requestRoom, setRequestRoom] = useState(false);
-  // const [hasOpponent, setHasOpponent] = useState(false);
+  const [leaveRoom, setLeaveRoom] = useState(false);
+  const [resetGame, setResetGame] = useState(false);
+  const [hasOpponent, setHasOpponent] = useState(false);
   const { yourScore, theirScore, complexEval, resetScore } = useEvaluate();
 
   useEffect(() => {
@@ -38,28 +42,39 @@ export default function useGame() {
       alert(data);
     });
 
-    client.on("theyConnect", data => {
-      // should check if someone else is playing; if not computer picks
-      // currently unused
-      // setHasOpponent(data);
+    client.on("opponentStatus", data => {
+      // listen for opponent presence; data is roomsize
+      console.log('status:', data);
+      setHasOpponent(data > 1 ? true : false);
+
+      if (data > 1) {
+        // if opponent is joining;
+        setPickB(null);
+        resetScore();
+      }
     });
 
     client.on("publicRoomName", data => {
       setRoom(data);
       // should check if someone else is playing; if not computer picks
-      // setHasOpponent(data);
     });
 
-    // client.emit("initDeck", {deckA, deckB}); // send table config on load
-    // probably unnecessary
   }, []);
 
+  const didMount = useRef(false);
   useEffect(() => {
-    // if (hasOpponent) { // this doesn't work
-      client.emit("myPick", pickA);
-    // } else {
-    //   setPickB(computerPlayer(handB));
-    // }
+    if (didMount.current) {
+      // skip first render
+      if (hasOpponent) {
+        // conditional for when another player is in a room
+        client.emit("myPick", pickA);
+      } else {
+        setPickB(computerPlayer(handB));
+      }
+    } else {
+      didMount.current = true;
+    }
+  // eslint-disable-next-line
   }, [pickA]);
 
   useEffect(() => {
@@ -73,7 +88,24 @@ export default function useGame() {
       }
       setRequestRoom(false);
     }
+  // eslint-disable-next-line
   }, [requestRoom]);
+
+  useEffect(() => {
+    if (resetGame) {
+      setPickA(null);
+      setPickB(null);
+      resetScore();
+
+      const newDeckA = shuffle(deck, 4);
+      const newDeckB = shuffle(deck, 4);
+      setDeckA(newDeckA);
+      setDeckB(newDeckB);
+      client.emit("initDeck", {deckA: newDeckA, deckB: newDeckB});
+      setResetGame(false);
+    }
+    // eslint-disable-next-line
+  }, [resetGame]);
 
   useEffect(() => {
     const cycleCards = () => {
@@ -89,51 +121,70 @@ export default function useGame() {
       });
     };
 
-    if (Number.isInteger(pickA) && Number.isInteger(pickB)) {
-      console.log("useEffect", handA[pickA]);
-      setResult(evaluate(handA[pickA], handB[pickB]));
+    if (pickA !== null && pickB !== null) {
+    // if (Number.isInteger(pickA) && Number.isInteger(pickB)) {
+      setTurnResult(turnEvaluate(handA[pickA], handB[pickB]));
       complexEval(handA[pickA], handB[pickB]);
       setPickA(null);
       setPickB(null);
       cycleCards();
     }
-  }, [pickA, pickB, complexEval]);
 
-  const newGame = () => {
-    setPickA(null);
-    setPickB(null);
-    setDeckA(shuffle(deck, 4));
-    setDeckB(shuffle(deck, 4));
-    resetScore();
-    // resets game board, but not over sockets
-  };
+    if (!deckA.length && !deckB.length) {
+      setGameResult(gameEvaluate(yourScore, theirScore));
+    }
+  // eslint-disable-next-line
+  }, [pickA, pickB]);
+
+  useEffect(() => {
+    client.emit("leaveRoom");
+    setLeaveRoom(false);
+  }, [leaveRoom]);
 
   const handA = setHand(deckA);
   const handB = setHand(deckB);
 
   const roomChangeListener = value => {
     // takes element value to setRoom
-    setRoom(value);
+    // setRoom(value);
+    setRoomListener(value);
   }
 
   const requestJoinRoom = () => {
-    // triggers useEffect with setRequestRoom dependency
+    // triggers useEffect with requestRoom dependency
     setRequestRoom(true);
+    setRoom(roomListener);
+  }
+
+  const requestLeaveRoom = () => {
+    // triggers useEffect with leaveRoom dependency
+    setLeaveRoom(true);
+    setRoom("");
+  }
+
+  const startNewGame = () => {
+    // triggers useEffect with resetGame dependency
+    setResetGame(true);
   }
 
   return {
     setPickA,
-    setResult,
+    setTurnResult,
+    setGameResult,
+    startNewGame,
     roomChangeListener,
     requestJoinRoom,
-    newGame,
+    requestLeaveRoom,
     handA,
     handB,
     deckA,
     deckB,
-    result,
+    turnResult,
+    gameResult,
     yourScore,
     theirScore,
-    room
+    room,
+    roomListener,
+    hasOpponent
   };
 };

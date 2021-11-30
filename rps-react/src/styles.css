@@ -1,32 +1,67 @@
 .App {
   font-family: sans-serif;
   text-align: center;
+
 }
 html, body, #root, #root>div {
   height: 100%
 }
 /*  */
 
+.Them {
+ background-color: rgb(255, 228, 233);
+ background-image: url("./textures/axiom-pattern.png");
+ padding-bottom: 4px;
+}
+
 .Pick {
-  font-size: 98px;
+  font-size: 32px;
+  justify-self: center;
+  align-self: center;
 }
 
 .result {
   font-weight: 900;
 }
 
+.RoomStatus {
+  background-color: rgb(233, 233, 255);
+  padding: 16px;
+  display: flex;
+  justify-content: right;
+  font-weight: bold;
+  color: black;
+
+  background-image: url("./textures/batthern.png");
+}
+
+.RoomStatus span{
+  padding-right: 8px;
+  display: flex;
+  justify-content: right;
+}
+
 .Deck {
-  font-size: 64px;
+  font-size: 24px;
   width: 80px;
   height: 120px;
-  color: yellow;
+  margin: 16px;
+  /* color: rgb(210, 210, 0); */
+  color: white;
 
+  background-color: rgb(100, 100, 100);
+  background-image: url('./textures/argyle.png');
   background-position: center;
 }
 
+.Deck img {
+  width: 48px;
+  height: 48px;
+}
+
 .next {
-  width: 100vw;
-  height: 100vw;
+  width: 100%;
+  height: 100%;
   /* opacity: 20%; */
   position: absolute;
 
@@ -85,4 +120,76 @@ html, body, #root, #root>div {
   min-height: 100%;
   background-position: center;
   background-size: cover;
+}
+/* implement tooltip */
+/* deck view*/
+.Deck .deck-info {
+  visibility: hidden;
+  width: fit-content;
+  /* background-color: rgb(83, 52, 52); */
+  background-color: rgb(100, 100, 100);
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 6px;
+
+  font-size: 18px;
+
+  position: relative;
+  z-index: 1;
+  top: -50%;
+  left: 150%;
+
+  display: flex;
+  flex-direction: row;
+
+}
+
+.Deck .deck-info span {
+  margin: 0 3px;
+}
+
+.Deck .deck-info img{
+  width: 24px;
+  height: 24px;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.Deck:hover .deck-info {
+  visibility: visible;
+}
+
+/* card view */
+.Card .card-info {
+  visibility: hidden;
+  width: fit-content;
+  /* background-color: rgb(83, 52, 52); */
+  background-color: rgb(100, 100, 100);
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 6px;
+
+  font-size: 18px;
+
+  position: relative;
+  z-index: 1;
+  /* top: -125%; */
+  left: 125%;
+
+  /* display: flex;
+  flex-direction: row; */
+
+}
+
+.Card:hover .card-info {
+  visibility: visible;
+}
+
+.GameResult button {
+  background-image: url("./textures/axiom-pattern.png");
+}
+
+.TurnResult button {
+  background-image: url("./textures/axiom-pattern.png");
 }
