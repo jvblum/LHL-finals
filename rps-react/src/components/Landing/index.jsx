@@ -14,10 +14,10 @@ export default function Landing() {
           <div className="w3-display-topleft w3-container w3-xxlarge">
             <p><button onClick={()=> setGameMode("join")} className="w3-button w3-black">Join Game</button></p>
             <p><button onClick={()=> setGameMode("new")} className="w3-button w3-black">New Game</button></p>
-            <p><button onClick={()=> document.getElementById('rules').style.display='block'} className="w3-button w3-black">Rules</button></p>
+            <p><button onClick={()=> document.getElementById('rules').style.display='block'} className="w3-button w3-black">How to Play/Rules</button></p>
           </div>
           <div className="w3-display-bottomleft w3-container">
-            <p className="w3-large">Johannes, Hamed, Volkan</p>
+            <p className="w3-large">created by Johannes Verne Melliza, Hamed Esmaeilzad and Volkan Benli</p>
           </div>
         </div>
         {/* <!-- rules Modal --> */}
@@ -25,27 +25,23 @@ export default function Landing() {
           <div className="w3-modal-content w3-animate-zoom">
             <div className="w3-container w3-black w3-display-container">
               <span onClick={() => document.getElementById('rules').style.display='none'} className="w3-button w3-display-topright w3-large">x</span>
-              <h1>Joinin a game</h1>
+              <h1>Solo Game</h1>
             </div>
             <div className="w3-container">
-              <h5>Vestibulum vitae ullamcorper tellus, at dapibus velit. Quisque felis quam, elementum eu justo eu, mollis sodales sapien. Morbi volutpat metus et convallis accumsan. Sed odio risus, bibendum nec odio id, sodales finibus lorem. Etiam vulputate vestibulum ipsum at aliquet. In vehicula velit sapien, eu lacinia mi porttitor ut. Sed eu ipsum in est ultricies consectetur. Vestibulum sodales massa in blandit efficitur. Nunc vitae sodales nibh. Nunc ac hendrerit tortor. Quisque volutpat ultrices enim. Proin vel nulla sapien.
-
-Vestibulum sodales lorem lorem. Praesent id facilisis libero, ut pretium nibh. In id orci dolor. Cras et orci non enim scelerisque accumsan eget at orci. Nunc ac mi eget sapien venenatis vestibulum non in ligula. Curabitur rhoncus a purus ut vulputate. Nunc nec mauris consectetur, eleifend lacus ut, bibendum lacus. Proin ultrices ex pellentesque, posuere leo sed, maximus velit. In varius at tortor vitae pulvinar. Nam dui lectus, sodales et vehicula vel, bibendum non libero. Ut congue nulla a ante volutpat, ac euismod nulla eleifend. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</h5>
+              <h5>Just click on the New Game button and your solo game will start!</h5>
             </div>
             <div className="w3-container w3-black">
-              <h1>Starting a Game</h1>
+              <h1>Multiplayer</h1>
             </div>
             <div className="w3-container">
-              <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis elementum auctor. Nulla vel nunc in massa luctus ullamcorper. Morbi vehicula orci quis tellus porta congue. Mauris in aliquam turpis, at gravida lacus. Integer tortor magna, maximus vel tempus eu, placerat eu sapien. Praesent fermentum diam id bibendum auctor. Vestibulum pellentesque quis libero a suscipit.
-Integer et nisi id massa mattis efficitur. Proin eget accumsan tortor, eget scelerisque massa. Nullam at sem auctor nunc efficitur egestas non vel orci. Pellentesque non mauris enim. Nulla dapibus, lorem vitae hendrerit tempor, mauris leo dapibus purus, sagittis elementum tellus leo eu diam. Aenean quis nisl maximus, feugiat odio id, sagittis diam. Pellentesque sodales tortor id risus ultricies tempus. Donec tincidunt quis sem et congue. Phasellus vehicula ipsum suscipit eleifend condimentum. Etiam tincidunt rhoncus ex non venenatis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam felis mi, vestibulum ornare elit in, aliquam consectetur tellus. Curabitur sagittis et leo eget hendrerit. Suspendisse sodales quam in turpis pharetra pulvinar.
-</h5>
+              <h5>After clicking on New Game, you can create an online lobby via entering a lobby name on top right and clicking create room/join room button. Now, your friend can join the game by opening up a new game on their end, entering lobby name and clicking the same create room/join room button.</h5>
             
             </div>
             <div className="w3-container w3-black">
-              <h1>Winning</h1>
+              <h1>Rules</h1>
             </div>
             <div className="w3-container">
-              <h5>Nullam quis justo semper, lobortis lectus quis, vehicula enim. Integer in urna fermentum, sollicitudin magna quis, lobortis urna. Nam a rutrum orci, sit amet vestibulum est. Aliquam consectetur eros nulla, vitae molestie diam rhoncus vehicula. Mauris in volutpat metus. Nullam ut rutrum tortor. Proin lacinia cursus lobortis. Etiam risus erat, rutrum venenatis congue nec, mattis congue purus. Proin id tincidunt metus, quis laoreet libero. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus sed lorem mattis diam ultrices ullamcorper ut mollis odio. Suspendisse potenti.</h5>
+              <h5>On top of the regular rock paper scissors rules, our game has might and defend cards. As the name suggests, defend forces a tie agains all cards, whereas might wins against all cards, except defend. Each player has a hand and a deck containing rock, paper, scissors, might and defend cards. Each player chooses a card to play from their hand every turn and the round resolves. When the round is resolved, points will be awarded depending on the outcome. After a round ends, a new card is drawn from player's deck and added to the hand. When both players run out of cards in their hands and decks, game ends. You will see that some cards are level 2 and unlike regular level 1 cards, they will award you 2 points rather than 1 if you play that card and win the round. But, if you lose, your opponent will be awarded 2 points as well!</h5>
             </div>
           </div>
         </div>
