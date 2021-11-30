@@ -59,6 +59,7 @@ export default function useGame() {
       // should check if someone else is playing; if not computer picks
     });
 
+  // eslint-disable-next-line
   }, []);
 
   const didMount = useRef(false);
@@ -179,6 +180,7 @@ export default function useGame() {
     handB,
     deckA,
     deckB,
+    pickA,
     turnResult,
     gameResult,
     yourScore,

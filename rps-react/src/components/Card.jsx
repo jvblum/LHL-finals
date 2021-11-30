@@ -3,11 +3,12 @@ export default function Card(props) {
   const onClick = () => {
     setPick(index);
   };
+  const select = index === props.select ? "select" : "";
   return (
-    <div className="Card">
+    <div>
       <button
         index={index}
-        className="Card"
+        className={`Card ${select}`}
         onClick={onClick}
         disabled={props.theirHand}
         style={{ background: `url(${card.img})` }}

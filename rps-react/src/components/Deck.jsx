@@ -2,7 +2,7 @@ export default function Card(props) {
   const deck = props.yourDeck;
   const top = deck[3];
   const deckInfo = [...deck].slice(3).map((card, index) => {
-    return <span key={index}><img src={card.img}/><div>{index + 1}</div></span>;
+    return <span key={index}><img src={card.img} alt={card.type}/><div>{index + 1}</div></span>;
   })
   // there is no hand state
   // the first three card in the deck are hand cards

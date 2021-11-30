@@ -99,13 +99,25 @@ html, body, #root, #root>div {
   height: 96px;
   border-radius: 50%;
 
-  box-shadow: black 1px;
+  /* box-shadow: black 1px; */
   /* background-color: black; */
   /* padding: 1%; */
   /* border: 2px black; */
 
+  border: black;
+  border-style: solid;
+  border-width: 1px;
+
   /* background-size: contain; */
   /* background-position: center; */
+}
+
+.select {
+  /* box-shadow: red 8px; */
+  border: rgb(204, 66, 66);
+  border-style: solid;
+  border-width: 3px;
+  margin: -2px 2px;
 }
 
 .Pick img {

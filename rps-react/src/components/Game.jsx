@@ -21,6 +21,7 @@ export default function Game(props) {
     handB,
     deckA,
     deckB,
+    pickA,
     turnResult,
     gameResult,
     yourScore,
@@ -55,7 +56,7 @@ export default function Game(props) {
       </div>
       <div className="You">
         <p>You: <b>{yourScore}</b> </p>
-        <Hand hand={handA} setPick={setPickA} />
+        <Hand hand={handA} setPick={setPickA} select={pickA}/>
         <Deck yourDeck={deckA} you={true} />
       </div>
       {turnResult && <TurnResult result={turnResult} setResult={setTurnResult} />}
