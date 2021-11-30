@@ -28,7 +28,7 @@ export default function RoomStatus(props) {
         requestJoinRoom();
         startNewGame();
         // reset current game when joining new room
-      }}>join room</button>
+      }}>join room/create room</button>
     </>}
     </div>
   )
