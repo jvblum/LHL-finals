@@ -1,33 +1,19 @@
-import Game from '../Game';
 import { useState } from "react";
+import Game from '../Game';
 
 export default function Landing() {
 
-  const [gameMode, setGameMode] = useState(null)
- 
-  const renderJoinGame = () => {
-    setGameMode("join")
-  }
-
-  const renderNewGame = () => {
-    setGameMode("new")
-  }
-
-  const renderSoloGame = () => {
-    setGameMode("solo")
-  }
-
+  const [gameMode, setGameMode] = useState(null);
 
   return (
-    gameMode ? <Game gameType={gameMode}/> : (
+    gameMode ? <Game gameMode={gameMode}/> : (
       <div className="landing">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"/>
         <div className="bgimg w3-display-container w3-text-white">  
           <div className="w3-display-topleft w3-container w3-xlarge">
-            <p><button onClick={()=> renderJoinGame()} className="w3-button w3-black">Join Game</button></p>
-            <p><button onClick={()=> renderNewGame()} className="w3-button w3-black">New Game</button></p>
-            <p><button onClick={()=> renderSoloGame()} className="w3-button w3-black">Solo Game</button></p>
+            <p><button onClick={()=> setGameMode("join")} className="w3-button w3-black">Join Game</button></p>
+            <p><button onClick={()=> setGameMode("new")} className="w3-button w3-black">New Game</button></p>
           <p><button onClick={()=> document.getElementById('rules').style.display='block'} className="w3-button w3-black">Rules</button></p>
           </div>
           <div className="w3-display-bottomleft w3-container">

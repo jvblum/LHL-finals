@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Hand from "./Hand";
 import Deck from "./Deck";
 import TurnResult from "./TurnResult";
@@ -8,7 +9,6 @@ import useGame from "../hooks/useGame";
 import Join from "./Join";
 
 export default function Game(props) {
-  const {gameType} = props;
   const {
     setPickA,
     setTurnResult,
@@ -27,12 +27,17 @@ export default function Game(props) {
     theirScore,
     room,
     roomListener,
-    hasOpponent
-  } = useGame();;
+    hasOpponent,
+  } = useGame();
 
-  const joinExistingGame = gameType === 'join';
+  const {gameMode} = props;
+  const [joinedGame, setJoinedGame] = useState(false);
+  const joinExistingGame = gameMode === "join";
+  console.log(joinExistingGame, gameMode);
+  console.log("THIS IS joinedGame: ", joinedGame);
 
-  return (joinExistingGame ? <Join  roomChangeListener={roomChangeListener} requestJoinRoom={requestJoinRoom} room={room} /> : (
+  return (
+    (joinExistingGame && (!joinedGame)) ? <Join setJoinedGame={setJoinedGame} roomChangeListener={roomChangeListener} requestJoinRoom={requestJoinRoom} roomListener={roomListener} startNewGame={startNewGame} /> : (
     <div className="App">
       <RoomStatus
         room={room}
