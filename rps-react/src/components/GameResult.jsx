@@ -22,7 +22,7 @@ export default function GameResult(props) {
         <p className="Pick">
           {`${yourScore} - ${theirScore}`}
         </p>
-        <p>
+        <p className="result">
           {result.message}
         </p>
       </button>

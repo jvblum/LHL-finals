@@ -15,12 +15,13 @@ html, body, #root, #root>div {
 }
 
 .Pick {
-  font-size: 32px;
+  font-size: 64px;
   justify-self: center;
   align-self: center;
 }
 
 .result {
+  font-size: 32px;
   font-weight: 900;
 }
 
