@@ -11,10 +11,10 @@ export default function Landing() {
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"/>
         <div className="bgimg w3-display-container w3-text-white">  
-          <div className="w3-display-topleft w3-container w3-xlarge">
+          <div className="w3-display-topleft w3-container w3-xxlarge">
             <p><button onClick={()=> setGameMode("join")} className="w3-button w3-black">Join Game</button></p>
             <p><button onClick={()=> setGameMode("new")} className="w3-button w3-black">New Game</button></p>
-          <p><button onClick={()=> document.getElementById('rules').style.display='block'} className="w3-button w3-black">Rules</button></p>
+            <p><button onClick={()=> document.getElementById('rules').style.display='block'} className="w3-button w3-black">Rules</button></p>
           </div>
           <div className="w3-display-bottomleft w3-container">
             <p className="w3-large">Johannes, Hamed, Volkan</p>
