@@ -4,7 +4,9 @@ Rock Paper Scissors with a twist. Created with create-react-app, Express.js, Nod
 
 ### Screenshots
 
-["frontpage"]('./screenshots/s1.png')
+!['game screen'](/screenshots/s1.png)
+!['turn result screen'](/screenshots/s2.png)
+!['how-to/rules'](/screenshots/s3.png)
 
 ## Server Setup
 
